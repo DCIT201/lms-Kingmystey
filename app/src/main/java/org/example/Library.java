@@ -1,13 +1,12 @@
 package org.example;
 
-
 import java.util.ArrayList;
 
 public class Library {
 
     private final ArrayList<Book> books;
 
-    //Constructor to initialize a list of books
+    // Constructor to initialize a list of books
     public Library() {
         books = new ArrayList<>();
     }
@@ -15,6 +14,7 @@ public class Library {
     public void addBook(Book book) {
         books.add(book);
     }
+
     public void removeBook(Book book) {
         books.remove(book);
     }
@@ -26,7 +26,7 @@ public class Library {
             System.out.println("Books in stock");
             int counter = 1;
             for (Book book : books) {
-                System.out.println(counter + "." + book.title() + "  Author: " + book.author() +"  Year Published:" + book.yearPublished() );
+                System.out.println(counter + "." + book.title() + "  Author: " + book.author() + "  Year Published:" + book.yearPublished());
                 counter++;
             }
         }
@@ -45,10 +45,4 @@ public class Library {
             System.out.println("Book list is empty.");
         }
     }
-
-
-
 }
-
-
-
