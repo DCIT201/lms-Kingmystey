@@ -1,34 +1,53 @@
 package org.example;
 
 public class App {
-    public String getGreeting() {
-        return "Hello World!";
-    }
-
     public static void main(String[] args) {
-        System.out.println(new App().getGreeting());
-
-        Patron patron = new Patron("akdie", "1101");
-        System.out.println(patron.getName());
-        System.out.println(patron.getIdNumber());
-        Book book = new Book("Kaya Girl", "Mamale Wolo", 2022);
-        Book book2 = new Book("The Son of Umbele", "Ama Atta Aido", 2005);
-        Book book3 = new Book("Titanic", "Prince Henry", 1995);
-        Book book4 = new Book("Rich Dad, Poor Dad", "Robert Kiyosaki", 2000);
-
-        patron.borrowbook(book);
-        patron.borrowbook(book2);
-        patron.borrowbook(book3);
-        patron.returnBook(book4); // This should indicate the book isn't found
-        patron.getBorrowedBooks();
-        patron.borrowbook(book3); // Borrowing the same book again
-
         Library library = new Library();
-        library.addBook(book);
-        library.addBook(book2);
-        library.addBook(book3);
-        library.listOfBooks();
 
-        library.searchBook("Kaya Girl");
+        // Adding books to the library
+        library.addBook(new Book("Kaya Girl", "Mamale Wolo", 2016));
+        library.addBook(new Book("Titanic: The Long Night", "John P. Eaton", 1999));
+        library.addBook(new Book("The Psychology of Money", "Morgan Housel", 2020));
+        library.addBook(new Book("Rich Dad Poor Dad", "Robert T. Kiyosaki", 1997));
+        library.addBook(new Book("The Son of Umbele", "Michele Obi", 2018));
+
+
+        // Displaying the list of books in the library
+        System.out.println("---------------------");
+        System.out.println("       Books in Stock at the  Library");
+        System.out.println("---------------------");
+        library.listBooks();
+        System.out.println();
+
+        // Creating an instance of the Patron who would borrow t
+        Patron patron = new Patron("Adjei Caleb", "1001");
+
+        Book bookToBorrow = library.findBookByTitle("Rich Dad Poor Dad");
+        patron.borrowBook(bookToBorrow);
+        System.out.println();
+
+        // Displaying the list of borrowed books
+        System.out.println("---------------------");
+        System.out.println("   Borrowed Books");
+        System.out.println("---------------------");
+        patron.listBorrowedBooks();
+        System.out.println();
+
+        // Returning the borrowed book
+        patron.returnBorrowedBook(bookToBorrow);
+        System.out.println();
+
+        // Displaying the list of books in the library after operations
+        System.out.println("---------------------");
+        System.out.println("Books in the Library After Operations");
+        System.out.println("---------------------");
+        library.listBooks();
+        System.out.println();
+
+        // Displaying the detailed list of books with titles and years
+        System.out.println("---------------------");
+        System.out.println("   Detailed List of Books");
+        System.out.println("---------------------");
+        library.listBooksTitlesAndYears();
     }
 }

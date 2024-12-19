@@ -7,45 +7,41 @@ public class Patron {
     private final String idNumber;
     private ArrayList<Book> borrowedBooks;
 
-    Patron(String name, String idNumber) {
+    // Constructor to initialize Patron with name and idNumber
+    public Patron(String name, String idNumber) {
         this.name = name;
         this.idNumber = idNumber;
         this.borrowedBooks = new ArrayList<>();
     }
 
+    // Getter and Setter for Patron's name
     public void setName(String name) {
         this.name = name;
     }
-
     public String getName() {
         return name;
     }
 
+    // Getter for Patron's idNumber
     public String getIdNumber() {
         return idNumber;
     }
 
-    public void borrowbook(Book book) {
-        if (borrowedBooks.contains(book)) {
-            System.out.println("Book is already borrowed");
-        } else {
-            borrowedBooks.add(book);
-            System.out.println(this.name + " has borrowed " + book.title());
-        }
+    // Method for Patron to borrow a book
+    public void borrowBook(Book book) {
+        borrowedBooks.add(book);
+        System.out.println(this.name + " has borrowed  " + book.title());
     }
 
-    public void returnBook(Book book) {
-        if (!borrowedBooks.contains(book)) {
-            System.out.println("Book cannot be found");
-        } else {
-            borrowedBooks.remove(book);
-            System.out.println(this.name + " has returned " + book.title());
-        }
+    // Method for Patron to return a borrowed book
+    public void returnBorrowedBook(Book book) {
+        borrowedBooks.remove(book);
     }
 
-    public void getBorrowedBooks() {
+    // Method to list all borrowed books
+    public void listBorrowedBooks() {
         if (borrowedBooks.isEmpty()) {
-            System.out.println("No book has been borrowed please");
+            System.out.println("No books borrowed.");
         } else {
             int counter = 1;
             for (Book book : borrowedBooks) {
@@ -53,5 +49,15 @@ public class Patron {
                 counter++;
             }
         }
+    }
+
+    // Changed method name from 'findBookByTitle' to 'searchBook'
+    public Book searchBook(String title) {
+        for (Book book : borrowedBooks) {
+            if (book.title().equals(title)) {
+                return book;
+            }
+        }
+        return null;  // If book not found
     }
 }
