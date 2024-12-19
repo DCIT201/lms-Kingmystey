@@ -2,44 +2,56 @@ package org.example;
 
 import java.util.ArrayList;
 
+// Class to represent a library patron (a person who borrows books)
 public class Patron {
     private String name;
     private final String idNumber;
     private ArrayList<Book> borrowedBooks;
 
-    // Constructor to initialize Patron with name and idNumber
+    // Constructor to initialize patron's name, id, and borrowedBooks list
     public Patron(String name, String idNumber) {
         this.name = name;
         this.idNumber = idNumber;
         this.borrowedBooks = new ArrayList<>();
     }
 
-    // Getter and Setter for Patron's name
+    // Method to set patron's name
     public void setName(String name) {
         this.name = name;
     }
+
+    // Method to get patron's name
     public String getName() {
         return name;
     }
 
-    // Getter for Patron's idNumber
+    // Method to get patron's ID number
     public String getIdNumber() {
         return idNumber;
     }
 
-    // Method for Patron to borrow a book
-    public void borrowBook(Book book) {
-        borrowedBooks.add(book);
-        System.out.println(this.name + " has borrowed  " + book.title());
+    // Method for the patron to borrow a book
+    public void borrowBook(Book book, Library library) {
+        if (library.removeBook(book)) {
+            borrowedBooks.add(book);
+            System.out.println(this.name + " has borrowed: " + book.title());
+        } else {
+            System.out.println("The book is not available.");
+        }
     }
 
-    // Method for Patron to return a borrowed book
-    public void returnBorrowedBook(Book book) {
-        borrowedBooks.remove(book);
+    // Method for the patron to return a borrowed book
+    public void returnBook(Book book, Library library) {
+        if (borrowedBooks.remove(book)) {
+            library.addBook(book);
+            System.out.println(this.name + " has returned: " + book.title());
+        } else {
+            System.out.println("You don't have this book.");
+        }
     }
 
-    // Method to list all borrowed books
-    public void listBorrowedBooks() {
+    // Method to list all the books borrowed by the patron
+    public void getBorrowedBooks() {
         if (borrowedBooks.isEmpty()) {
             System.out.println("No books borrowed.");
         } else {
@@ -49,15 +61,5 @@ public class Patron {
                 counter++;
             }
         }
-    }
-
-    // Changed method name from 'findBookByTitle' to 'searchBook'
-    public Book searchBook(String title) {
-        for (Book book : borrowedBooks) {
-            if (book.title().equals(title)) {
-                return book;
-            }
-        }
-        return null;  // If book not found
     }
 }

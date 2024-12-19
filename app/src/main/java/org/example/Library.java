@@ -2,10 +2,11 @@ package org.example;
 
 import java.util.ArrayList;
 
+// Class to represent a library containing books
 public class Library {
     private final ArrayList<Book> books;
 
-    // Constructor to initialize a list of books
+    // Constructor to initialize the list of books
     public Library() {
         books = new ArrayList<>();
     }
@@ -15,13 +16,13 @@ public class Library {
         books.add(book);
     }
 
-    // Method to remove a book from the library
-    public void removeBook(Book book) {
-        books.remove(book);
+    // Method to remove a book from the library by title
+    public boolean removeBook(Book book) {
+        return books.remove(book);
     }
 
-    // Method to find a book by title
-    public Book findBookByTitle(String title) {
+    // Method to find a book in the library by title
+    public Book searchBook(String title) {
         for (Book book : books) {
             if (book.title().equals(title)) {
                 return book;
@@ -30,27 +31,27 @@ public class Library {
         return null;
     }
 
-    // Method to list all books in the library
-    public void listBooks() {
+    // Method to list all the books in the library
+    public void booksInStock() {
         if (books.isEmpty()) {
             System.out.println("No books available.");
         } else {
             int counter = 1;
             for (Book book : books) {
-                System.out.println(counter + "." + book.title());
+                System.out.println(counter + ". " + book.title());
                 counter++;
             }
         }
     }
 
-    // Method to list books with titles and years
+    // Method to list the books with titles and years
     public void listBooksTitlesAndYears() {
         if (books.isEmpty()) {
             System.out.println("No books available.");
         } else {
             int counter = 1;
             for (Book book : books) {
-                System.out.println(counter + "." + book.title() + " (" + book.yearPublished() + ")");
+                System.out.println(counter + ". " + book.title() + " (" + book.yearPublished() + ")");
                 counter++;
             }
         }
