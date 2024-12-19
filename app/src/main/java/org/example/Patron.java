@@ -1,61 +1,59 @@
+
 package org.example;
 
 import java.util.ArrayList;
 
 // Class to represent a library patron (a person who borrows books)
 public class Patron {
-    private String name;
-    private final String idNumber;
-    private ArrayList<Book> borrowedBooks;
+    // Name of the patron
+    private final String name;
+    // List to store the books borrowed by the patron
+    private final ArrayList<Book> borrowedBooks;
 
-    // Constructor to initialize patron's name, id, and borrowedBooks list
-    public Patron(String name, String idNumber) {
+    // Constructor to initialize the patron's name and borrowedBooks list
+    public Patron(String name, int id) {
         this.name = name;
-        this.idNumber = idNumber;
-        this.borrowedBooks = new ArrayList<>();
+        borrowedBooks = new ArrayList<>();
     }
 
-    // Method to set patron's name
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    // Method to get patron's name
-    public String getName() {
-        return name;
-    }
-
-    // Method to get patron's ID number
-    public String getIdNumber() {
-        return idNumber;
-    }
-
-    // Method for the patron to borrow a book
+    // Method for the patron to borrow a book from the library
     public void borrowBook(Book book, Library library) {
-        if (library.removeBook(book)) {
+        // Attempt to remove the book from the library
+        if (library.removeBook(book.title())) {
+            // If successful, add the book to the patron's borrowedBooks list
             borrowedBooks.add(book);
-            System.out.println(this.name + " has borrowed: " + book.title());
+            // Print confirmation message
+            System.out.println(name + " borrowed : " + book.title());
         } else {
-            System.out.println("The book is not available.");
+            // Print error message if the book is not available
+            System.out.println("The Book is not available.");
         }
     }
 
-    // Method for the patron to return a borrowed book
+    // Method for the patron to return a borrowed book to the library
     public void returnBook(Book book, Library library) {
+        // Attempt to remove the book from the patron's borrowedBooks list
         if (borrowedBooks.remove(book)) {
+            // If successful, add the book back to the library
             library.addBook(book);
-            System.out.println(this.name + " has returned: " + book.title());
+            // Print confirmation message
+            System.out.println(name + " returned : " + book.title());
         } else {
+            // Print error message if the book is not found in the borrowedBooks list
             System.out.println("You don't have this book.");
         }
     }
 
     // Method to list all the books borrowed by the patron
-    public void getBorrowedBooks() {
+    public void listBorrowedBooks() {
+        // Check if the borrowedBooks list is empty
         if (borrowedBooks.isEmpty()) {
+            // Print message if no books are borrowed
             System.out.println("No books borrowed.");
         } else {
+            // Initialize a counter for numbering the list
             int counter = 1;
+            // Loop through the borrowedBooks list and print each book's title with numbering
             for (Book book : borrowedBooks) {
                 System.out.println(counter + ". " + book.title());
                 counter++;

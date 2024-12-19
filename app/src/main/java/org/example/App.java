@@ -1,3 +1,4 @@
+
 package org.example;
 
 public class App {
@@ -5,15 +6,12 @@ public class App {
         Library library = new Library();
 
         // Adding books to the library
-        library.addBook(new Book("Kaya Girl", "Mamale Wolo", 2016));
-        library.addBook(new Book("The Son of Umbele", "Michele Obi", 2018));
-        library.addBook(new Book("Things Fall Apart", "Chinua Achebe", 1958));
-        library.addBook(new Book("Half of a Yellow Sun", "Chimamanda Ngozi Adichie", 2006));
-        library.addBook(new Book("Americanah", "Chimamanda Ngozi Adichie", 2013));
-        library.addBook(new Book("Titanic: The Long Night", "John P. Eaton", 1999));
-        library.addBook(new Book("The Psychology of Money", "Morgan Housel", 2020));
-        library.addBook(new Book("Rich Dad Poor Dad", "Robert T. Kiyosaki", 1997));
+        library.addBook(new Book("Harry Potter and the Philosopher's Stone", "J.K. Rowling", 1997));
+        library.addBook(new Book("A Contemporary Confessions for Modern Gnostics", "Dylan Pahman", 2024));
+        library.addBook(new Book("To Kill a Mockingbird", "Harper Lee", 1960));
+        library.addBook(new Book("The Third Policeman", "Flann O'Brien", 1967));
         library.addBook(new Book("Towards Colonial Freedom: Africa in the Struggle Against World Imperialism", "Kwame Nkrumah", 1969));
+
 
         String star = "******************************";
 
@@ -21,13 +19,13 @@ public class App {
         System.out.println(star);
         System.out.println("       Books in the Library");
         System.out.println(star);
-        library.booksInStock();
+        library.listBooks();
         System.out.println();
 
         // Creating a patron and borrowing a book
-        Patron patron = new Patron("Kwaku Oware", "1001");
+        Patron patron = new Patron("Kwaku Oware", 1001);
 
-        Book bookToBorrow = library.searchBook("Things Fall Apart");
+        Book bookToBorrow = library.findBookByTitle("To Kill a Mockingbird");
         patron.borrowBook(bookToBorrow, library);
         System.out.println();
 
@@ -35,7 +33,7 @@ public class App {
         System.out.println(star);
         System.out.println("   Borrowed Books");
         System.out.println(star);
-        patron.getBorrowedBooks();
+        patron.listBorrowedBooks();
         System.out.println();
 
         // Returning the borrowed book
@@ -46,7 +44,7 @@ public class App {
         System.out.println(star);
         System.out.println("Books in the Library After Operations");
         System.out.println(star);
-        library.booksInStock();
+        library.listBooks();
         System.out.println();
 
         // Displaying the detailed list of books with titles and years

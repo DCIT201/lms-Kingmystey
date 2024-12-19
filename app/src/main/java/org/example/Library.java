@@ -1,3 +1,4 @@
+
 package org.example;
 
 import java.util.ArrayList;
@@ -6,7 +7,8 @@ import java.util.ArrayList;
 public class Library {
     private final ArrayList<Book> books;
 
-    // Constructor to initialize the list of books
+
+    // Constructor to initialize the books list
     public Library() {
         books = new ArrayList<>();
     }
@@ -17,12 +19,12 @@ public class Library {
     }
 
     // Method to remove a book from the library by title
-    public boolean removeBook(Book book) {
-        return books.remove(book);
+    public boolean removeBook(String title) {
+        return books.removeIf(book -> book.title().equals(title));
     }
 
     // Method to find a book in the library by title
-    public Book searchBook(String title) {
+    public Book findBookByTitle(String title) {
         for (Book book : books) {
             if (book.title().equals(title)) {
                 return book;
@@ -31,27 +33,28 @@ public class Library {
         return null;
     }
 
-    // Method to list all the books in the library
-    public void booksInStock() {
+
+    // Method to list only book titles with numbering
+    public void listBooks() {
         if (books.isEmpty()) {
             System.out.println("No books available.");
         } else {
             int counter = 1;
             for (Book book : books) {
-                System.out.println(counter + ". " + book.title());
+                System.out.println(counter + "." + book.title());
                 counter++;
             }
         }
     }
 
-    // Method to list the books with titles and years
+    // Method to list book titles and years with numbering
     public void listBooksTitlesAndYears() {
         if (books.isEmpty()) {
             System.out.println("No books available.");
         } else {
             int counter = 1;
             for (Book book : books) {
-                System.out.println(counter + ". " + book.title() + " (" + book.yearPublished() + ")");
+                System.out.println(counter + "." + book.title() + " (" + book.yearPublished() + ")");
                 counter++;
             }
         }
